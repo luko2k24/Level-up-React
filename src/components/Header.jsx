@@ -1,53 +1,84 @@
-// src/components/Header.jsx
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { useMemo, useState } from 'react'
-import { getCart, cartTotal } from '../data/db'
+import React, { useEffect, useMemo, useState } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
-export default function Header(){
-  const nav = useNavigate()
+let safeGetCart = () => {
+  try {
+    const mod = require('../data/db.js')
+    if (mod.getCart) return mod.getCart()
+  } catch (_) {}
+  try {
+    return JSON.parse(localStorage.getItem('cart') || '[]')
+  } catch (_) {
+    return []
+  }
+}
+
+export default function Header() {
   const [q, setQ] = useState('')
-  const total = useMemo(() => cartTotal(), [getCart()]) // refresca al navegar
-  const location = useLocation()
+  const [cart, setCart] = useState([])
+  const nav = useNavigate()
 
-  const onSubmit = (e) => {
+  useEffect(() => {
+    const c = safeGetCart()
+    setCart(Array.isArray(c) ? c : [])
+  }, [])
+
+  const totalCLP = useMemo(() => {
+    const total = cart.reduce((acc, it) => {
+      const price = Number(it?.price) || 0
+      const qty = Number(it?.qty) || 1
+      return acc + price * qty
+    }, 0)
+    return new Intl.NumberFormat('es-CL', {
+      style: 'currency', currency: 'CLP', maximumFractionDigits: 0
+    }).format(total)
+  }, [cart])
+
+  const onSearch = (e) => {
     e.preventDefault()
     const query = q.trim()
-    // enviamos a /categorias con ?q=busqueda
     nav(`/categorias${query ? `?q=${encodeURIComponent(query)}` : ''}`)
     setQ('')
   }
 
   return (
-    <nav className="navbar navbar-dark" style={{background: 'var(--surface)'}}>
-      <div className="container">
-        {/* Marca */}
-        <Link className="navbar-brand" to="/">Level-Up Gamer</Link>
+    <nav className="navbar navbar-expand-lg navbar-dark navbar-glass border-bottom border-primary-subtle sticky-top">
+      <div className="container d-flex align-items-center flex-wrap gap-2">
+        {/* Brand */}
+        <Link to="/" className="brand-title me-2 text-decoration-none">
+          <span className="brand-main">Level-Up</span> <span className="brand-accent">Gamer</span>
+        </Link>
 
-        {/* Buscador centrado (similar al mock) */}
-        <form className="d-none d-md-flex align-items-center gap-2 flex-grow-1 mx-3" onSubmit={onSubmit}>
+        {/* Menú como botones */}
+        <div className="d-flex align-items-center flex-wrap ms-auto order-2 order-lg-1">
+          <NavLink end to="/" className={({isActive}) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Inicio</NavLink>
+          <NavLink to="/categorias" className={({isActive}) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Categorías</NavLink>
+          <NavLink to="/ofertas" className={({isActive}) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Ofertas</NavLink>
+          <NavLink to="/admin" className={({isActive}) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Admin</NavLink>
+        </div>
+
+        {/* Buscador */}
+        <form className="d-flex align-items-center order-3 ms-lg-3" onSubmit={onSearch} role="search">
           <input
-            className="form-control"
+            className="form-control search-compact me-2"
+            type="search"
             placeholder="Buscar"
             value={q}
-            onChange={(e)=>setQ(e.target.value)}
+            onChange={(e) => setQ(e.target.value)}
           />
-          <button className="btn btn-outline-light">Buscar</button>
+          <button className="btn btn-outline-light btn-sm">Buscar</button>
         </form>
 
-        {/* Navegación derecha */}
-        <div className="navbar-nav flex-row gap-3 align-items-center">
-          <Link className={`nav-link ${location.pathname.startsWith('/categorias')?'active':''}`} to="/categorias">Categorías</Link>
-          <Link className={`nav-link ${location.pathname.startsWith('/ofertas')?'active':''}`} to="/ofertas">Ofertas</Link>
+        {/* Carrito + Login */}
+        <div className="ms-lg-3 d-flex align-items-center gap-2 order-4">
+          <NavLink to="/carrito" className="btn btn-light">
+            Carrito <span className="badge bg-dark ms-2">{totalCLP}</span>
+          </NavLink>
 
-          {/* Carrito con badge de total $ */}
-          <Link className={`nav-link position-relative ${location.pathname.startsWith('/carrito')?'active':''}`} to="/carrito">
-            Carrito
-            <span className="badge rounded-pill ms-2" style={{background:'var(--success)'}}>
-              ${total.toLocaleString('es-CL')}
-            </span>
-          </Link>
-
-          <Link className={`nav-link ${location.pathname.startsWith('/admin')?'active':''}`} to="/admin">Admin</Link>
+          {/* Botón Login “vacío” por ahora */}
+          <NavLink to="/login" className="btn btn-outline-light">
+            Login
+          </NavLink>
         </div>
       </div>
     </nav>

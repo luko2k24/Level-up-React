@@ -184,3 +184,77 @@ footer { background: var(--surface); color: var(--muted); }
 .product-hero:hover img{
   transform: scale(1.02);
 }
+
+/* home no final */
+.hero-surface {
+  background: linear-gradient(180deg, rgba(10,13,16,.7), rgba(10,13,16,.95));
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 0 40px rgba(30,144,255,.08) inset;
+}
+
+.neon-grid {
+  background:
+    radial-gradient(transparent 0 52%, rgba(57,255,20,.06) 54% 55%, transparent 57%) 0 0 / 32px 32px,
+    radial-gradient(transparent 0 52%, rgba(30,144,255,.06) 54% 55%, transparent 57%) 16px 16px / 32px 32px;
+  opacity: .45;
+  pointer-events: none;
+}
+
+.card-glow {
+  background: var(--surface);
+  border: 1px solid rgba(57,255,20,.12);
+  box-shadow: 0 0 0 1px rgba(57,255,20,.05), 0 10px 30px rgba(0,0,0,.3);
+}
+
+.object-cover { object-fit: cover; }
+
+.text-accent { color: var(--accent) !important; }
+.bg-accent { background: var(--accent) !important; }
+
+/* Asegura ratio util en Bootstrap 5 */
+.ratio-21x9 { --bs-aspect-ratio: calc(9 / 21 * 100%); }
+
+
+
+/* Header con misma paleta del sitio */
+.navbar-glass {
+  background: var(--surface); /* fondo negro */
+  border-bottom: 1px solid rgba(57,255,20,.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+/* Estilo de marca */
+.brand-main {
+  color: var(--primary);
+  font-weight: 700;
+  text-shadow: 0 0 10px var(--primary);
+}
+.brand-accent {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Botones del navbar */
+.btn-outline-light {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  background-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn-outline-light:hover {
+  background-color: var(--primary);
+  color: var(--surface);
+}
+
+.active {
+  background-color: var(--primary);
+  color: var(--surface);
+}
+
+/* Estilo del logo y navbar */
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
