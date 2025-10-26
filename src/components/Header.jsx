@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-
 let safeGetCart = () => {
   try {
     const mod = require('../data/db.js')
