@@ -239,7 +239,7 @@ footer { background: var(--surface); color: var(--muted); }
   color: var(--primary);
   background-color: transparent;
   transition: background-color 0.3s ease, color 0.3s ease;
-}
+} 
 .btn-outline-light:hover {
   background-color: var(--primary);
   color: var(--surface);
@@ -258,3 +258,36 @@ footer { background: var(--surface); color: var(--muted); }
 }
 
 
+/* ====== Parche mínimo de contraste de texto ====== */
+
+/* Texto más claro en cards y paneles oscuros */
+.card,
+.panel {
+  color: #eef4f1; /* blanco suave, sin ser puro */
+}
+
+/* Títulos y descripciones dentro de cards */
+.card .card-title,
+.card .card-subtitle,
+.card .card-text,
+.card a {
+  color: #eef4f1 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.65); /* ayuda a leer sobre fondos oscuros */
+}
+
+/* “muted” un poco más visible (fechas, pequeños detalles) */
+.card .text-muted,
+.text-muted {
+  color: #c9d1d9 !important;
+}
+
+/* Si usas .text-soft en noticias, sube su brillo */
+.text-soft {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Imágenes de card un pelín más claras al pasar el mouse (opcional) */
+.card:hover .object-cover {
+  filter: brightness(1) !important;
+  transition: .2s ease;
+}
