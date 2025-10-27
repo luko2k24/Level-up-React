@@ -8,8 +8,8 @@ export default function Home() {
       titulo: 'Worlds 2025: fechas y sede en China',
       resumen:
         'Riot adelantó calendario y ciudades sede del Mundial de League of Legends 2025. La definición promete estadio lleno y nuevo formato.',
-      img: 'https://images.contentstack.io/v3/assets/bltad9188aa9a70543a/blt7f294c3f7e1a2c6f/66fbf77c7b9a538a9767a66d/LOL_Worlds2025_KeyArt.jpg',
-      link: '/img/inicio/Worlds.jpg',
+      link: 'https://lolesports.com/es-MX/news/worlds-2025-primer',
+      img: '/img/inicio/Faker.jpeg',
       etiqueta: 'Nuevo'
     },
     {
@@ -25,6 +25,11 @@ export default function Home() {
 
   return (
     <div className="container py-4">
+      <div className="text-center my-5">
+      <h1 className="display-4 text-light">¡Arma tu setup con nuestra selección de hardware y periféricos!</h1>
+      <p className="text-muted">Encuentra lo mejor para tu experiencia gamer</p>
+     </div>
+
 
       {/* ======= Cabecera Noticias ======= */}
       <div className="d-flex align-items-center justify-content-between mb-2">
@@ -105,6 +110,34 @@ export default function Home() {
           ))}
         </div>
       </section>
+      {/* ======= Próximos eventos ======= */}
+      <div className="mt-5">
+        <h3 className="h5 text-brand mb-3">🎮 Próximos eventos y lanzamientos</h3>
+        <div className="row g-3">
+          <div className="col-md-4">
+            <div className="card card-glow p-3 text-center">
+              <i className="bi bi-calendar-event fs-3 text-accent"></i>
+              <p className="mt-2 mb-0 fw-semibold">The Game Awards 2025</p>
+              <small className="text-soft">12 de diciembre</small>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="card card-glow p-3 text-center">
+              <i className="bi bi-controller fs-3 text-accent"></i>
+              <p className="mt-2 mb-0 fw-semibold">Nuevo Doom Eternal 2</p>
+              <small className="text-soft">Enero 2026</small>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="card card-glow p-3 text-center">
+              <i className="bi bi-rocket fs-3 text-accent"></i>
+              <p className="mt-2 mb-0 fw-semibold">Lanzamiento Unreal Engine 6</p>
+              <small className="text-soft">Marzo 2026</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   )
 }

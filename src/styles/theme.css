@@ -291,3 +291,6 @@ footer { background: var(--surface); color: var(--muted); }
   filter: brightness(1) !important;
   transition: .2s ease;
 }
+.ratio img {
+  object-fit: cover;  /* Asegura que la imagen cubra el espacio sin distorsionar */
+}
