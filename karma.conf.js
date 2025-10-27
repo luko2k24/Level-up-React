@@ -37,14 +37,14 @@ module.exports = function (config) {
     },
 
     reporters: ['progress', 'coverage'],
-    coverageReporter: {
+      coverageReporter: {
       dir: 'coverage',
       reporters: [
         { type: 'html', subdir: 'html' },
         { type: 'text-summary' }
       ],
       check: {
-        global: { statements: 60, branches: 50, functions: 60, lines: 60 }
+        global: { statements: 60, branches: 70, functions: 60, lines: 60 }
       }
     },
 
