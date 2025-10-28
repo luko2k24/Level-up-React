@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getProducts, createProduct, updateProduct, deleteProduct } from '../data/db.js';
 import '../styles/admin.css';
 const CLP = new Intl.NumberFormat('es-CL', {
@@ -9,7 +10,26 @@ const CLP = new Intl.NumberFormat('es-CL', {
 
 const CATEGORIAS = ['Periféricos', 'Audio', 'Monitores', 'Muebles', 'Almacenamiento', 'Accesorios'];
 
-export default function Admin() {
+export default function AdminPanel() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const params = new URLSearchParams(location.search);
+  const view = (params.get('view') || 'home').toLowerCase();
+  const mode = (params.get('mode') || 'open').toLowerCase();
+
+  const setView = (v, m = 'open') => {
+    const next = new URLSearchParams(location.search);
+    next.set('view', v);
+    next.set('mode', m);
+    navigate({ search: `?${next.toString()}` }, { replace: false });
+  };
+
+  const stats = useMemo(
+    () => ({ compras: 1234, productos: 400, usuarios: 892, pendientes: 17 }),
+    []
+  );
+
   const [list, setList] = useState([]);
   const [form, setForm] = useState({ id: '', name: '', price: '', category: '', offer: false });
   const [editing, setEditing] = useState(false);
@@ -114,126 +134,142 @@ export default function Admin() {
     setErr('');
   };
 
+  const kpiBox = (title, value, color) => (
+    <div className="col-12 col-md-4 mb-3">
+      <div
+        className="card shadow-sm h-100"
+        style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,.08)', background: '#0f0f0f' }}
+      >
+        <div
+          className="p-3"
+          style={{
+            background: color,
+            color: '#000',
+            fontWeight: 700,
+            letterSpacing: .2,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
+          <span>{title}</span>
+          <span style={{ opacity: .8, fontSize: 12 }}>Dashboard</span>
+        </div>
+        <div className="p-4 d-flex align-items-end justify-content-between">
+          <div style={{ fontSize: 42, fontWeight: 800, lineHeight: 1, color: '#fff' }}>{value}</div>
+          <div style={{ color: 'rgba(255,255,255,.75)' }} className="small">Última act.</div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="admin-container">
-      {/* DASHBOARD */}
-      <div className="dashboard">
-        <div className="kpi-card blue">
-          <h3>Compras</h3>
-          <p>1.234</p>
-          <p>Probabilidad de aumento: 20%</p>
-        </div>
-        <div className="kpi-card green">
-          <h3>Productos</h3>
-          <p>400</p>
-          <p>Inventario actual: 500</p>
-        </div>
-        <div className="kpi-card yellow">
-          <h3>Usuarios</h3>
-          <p>890</p>
-          <p>Nuevos este mes: 120</p>
-        </div>
+    <div className="container-fluid py-4">
+      <div className="d-flex align-items-center justify-content-between mb-3">
+        <h2 className="mb-0" style={{ color: '#fff' }}>Panel de administración</h2>
       </div>
 
-      {/* FORMULARIO DE CREACIÓN/EDICIÓN DE PRODUCTO */}
-      <div className="form-container">
-        <h2>Gestión de productos</h2>
-
-        {err && <div className="alert">{err}</div>}
-
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <label>ID</label>
-            <input
-              value={form.id}
-              onChange={e => onChange('id', e.target.value)}
-              disabled={editing}
-              placeholder="(auto si lo dejas vacío)"
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Nombre</label>
-            <input
-              value={form.name}
-              onChange={e => onChange('name', e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Precio</label>
-            <input
-              type="number"
-              value={form.price}
-              onChange={e => onChange('price', e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Categoría</label>
-            <select
-              value={form.category}
-              onChange={e => onChange('category', e.target.value)}
-              required
-            >
-              <option value="">Selecciona</option>
-              {CATEGORIAS.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-          </div>
-
-          <div className="form-group">
-            <input
-              type="checkbox"
-              checked={form.offer}
-              onChange={e => onChange('offer', e.target.checked)}
-            />
-            <label>En oferta</label>
-          </div>
-
-          <div className="form-actions">
-            <button type="submit">{editing ? 'Guardar cambios' : 'Crear'}</button>
-            <button type="button" onClick={onClear}>Limpiar</button>
-          </div>
-        </form>
+      <div className="row">
+        {kpiBox('Compras', stats.compras, '#30A4FF')}
+        {kpiBox('Productos', stats.productos, '#47D16E')}
+        {kpiBox('Usuarios', stats.usuarios, '#FFC44D')}
       </div>
 
-      {/* LISTADO DE PRODUCTOS */}
-      <div className="products-list">
-        <h2>Listado de productos</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Categoría</th>
-              <th>Precio</th>
-              <th>Oferta</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orderedList.map(p => (
-              <tr key={p.id}>
-                <td>{p.id}</td>
-                <td>{p.name}</td>
-                <td>{p.category}</td>
-                <td>{CLP.format(p.price)}</td>
-                <td>{p.offer ? 'Sí' : 'No'}</td>
-                <td>
-                  <button onClick={() => onEdit(p)}>Editar</button>
-                  <button onClick={() => onDelete(p.id)}>Eliminar</button>
-                </td>
-              </tr>
-            ))}
-            {orderedList.length === 0 && (
-              <tr>
-                <td colSpan="6">No hay productos. Crea el primero.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      <div className="row">
+        <div className="col-12 col-md-6">
+          <div className="form-container">
+            <h2>Gestión de productos</h2>
+            {err && <div className="alert">{err}</div>}
+            <form onSubmit={onSubmit}>
+              <div className="form-group">
+                <label>ID</label>
+                <input
+                  value={form.id}
+                  onChange={e => onChange('id', e.target.value)}
+                  disabled={editing}
+                  placeholder="(auto si lo dejas vacío)"
+                />
+              </div>
+              <div className="form-group">
+                <label>Nombre</label>
+                <input
+                  value={form.name}
+                  onChange={e => onChange('name', e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Precio</label>
+                <input
+                  type="number"
+                  value={form.price}
+                  onChange={e => onChange('price', e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Categoría</label>
+                <select
+                  value={form.category}
+                  onChange={e => onChange('category', e.target.value)}
+                  required
+                >
+                  <option value="">Selecciona</option>
+                  {CATEGORIAS.map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+              <div className="form-group">
+                <input
+                  type="checkbox"
+                  checked={form.offer}
+                  onChange={e => onChange('offer', e.target.checked)}
+                />
+                <label>En oferta</label>
+              </div>
+              <div className="form-actions">
+                <button type="submit">{editing ? 'Guardar cambios' : 'Crear'}</button>
+                <button type="button" onClick={onClear}>Limpiar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="col-12 col-md-6">
+          <div className="products-list">
+            <h2>Listado de productos</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Categoría</th>
+                  <th>Precio</th>
+                  <th>Oferta</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orderedList.map(p => (
+                  <tr key={p.id}>
+                    <td>{p.id}</td>
+                    <td>{p.name}</td>
+                    <td>{p.category}</td>
+                    <td>{CLP.format(p.price)}</td>
+                    <td>{p.offer ? 'Sí' : 'No'}</td>
+                    <td>
+                      <button onClick={() => onEdit(p)}>Editar</button>
+                      <button onClick={() => onDelete(p.id)}>Eliminar</button>
+                    </td>
+                  </tr>
+                ))}
+                {orderedList.length === 0 && (
+                  <tr>
+                    <td colSpan="6">No hay productos. Crea el primero.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
