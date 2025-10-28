@@ -47,6 +47,9 @@ export default function Header() {
     setMenuVisible(!menuVisible);
   };
 
+  // Verificar si el usuario está autenticado como admin
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom sticky-top">
       <div className="container d-flex align-items-center flex-wrap gap-2">
@@ -73,7 +76,11 @@ export default function Header() {
             <NavLink end to="/" className={({ isActive }) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Inicio</NavLink>
             <NavLink to="/categorias" className={({ isActive }) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Categorías</NavLink>
             <NavLink to="/ofertas" className={({ isActive }) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Ofertas</NavLink>
-            <NavLink to="/admin" className={({ isActive }) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Admin</NavLink>
+
+            {/* Mostrar Admin solo si está autenticado como admin */}
+            {isAdmin && (
+              <NavLink to="/admin" className={({ isActive }) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Admin</NavLink>
+            )}
 
             {/* Carrito + Login dentro del menú desplegable */}
             <NavLink to="/carrito" className="btn btn-light">
