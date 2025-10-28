@@ -16,6 +16,8 @@ import Admin from './pages/Admin.jsx'
 import ProductoDetalle from './pages/ProductoDetalle.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 export default function App() {
   return (

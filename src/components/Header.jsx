@@ -82,28 +82,33 @@ export default function Header() {
               <NavLink to="/admin" className={({ isActive }) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Admin</NavLink>
             )}
 
-            {/* Carrito + Login dentro del menú desplegable */}
-            <NavLink to="/carrito" className="btn btn-light">
-              Carrito <span className="badge bg-dark ms-2">{totalCLP}</span>
-            </NavLink>
-
-            <NavLink to="/login" className="btn btn-outline-light">
-              Login
+            {/* Carrito como logo */}
+            <NavLink to="/carrito" className="btn btn-outline-light ms-3">
+              <i className="fa fa-shopping-cart" style={{ fontSize: '24px' }}></i> {/* Carrito como ícono */}
+              <span className="ms-2">{totalCLP}</span>
             </NavLink>
           </div>
         </div>
 
-        {/* Buscador */}
-        <form className="d-flex align-items-center ms-3" onSubmit={onSearch} role="search">
-          <input
-            className="form-control search-compact me-2"
-            type="search"
-            placeholder="Buscar"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-          />
-          <button className="btn btn-outline-light btn-sm ms-2">Buscar</button>
-        </form>
+        {/* Buscador y Login al lado */}
+        <div className="d-flex align-items-center ms-3">
+          <form className="d-flex align-items-center" onSubmit={onSearch} role="search">
+            <input
+              className="form-control search-compact me-2"
+              type="search"
+              placeholder="Buscar"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              style={{ backgroundColor: 'white', color: 'black' }}
+            />
+            <button className="btn btn-outline-light btn-sm ms-2">Buscar</button>
+          </form>
+
+          {/* Login con ícono de persona */}
+          <NavLink to="/login" className="btn btn-outline-light ms-3">
+            <i className="fa fa-user" style={{ fontSize: '24px' }}></i>  {/* Icono de persona */}
+          </NavLink>
+        </div>
       </div>
     </nav>
   );
