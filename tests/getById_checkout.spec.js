@@ -1,4 +1,4 @@
-// tests/getById_checkout.spec.js
+
 import {
   getProducts,
   getProductById,

@@ -70,7 +70,7 @@ export default function Header() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Menú */}
+        {/* Menú */} 
         <div className={`collapse navbar-collapse ${menuVisible ? 'show' : ''}`} id="navbarNav">
           <div className="navbar-nav ms-auto">
             <NavLink end to="/" className={({ isActive }) => `btn btn-outline-light btn-sm me-2 ${isActive ? 'active' : ''}`}>Inicio</NavLink>
