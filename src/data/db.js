@@ -14,8 +14,6 @@ const seedProducts = [
   { id: 'p5', name: 'Monitor 27" 144Hz', price: 189990, category: 'Monitores', offer: false, image: '/img/productos/monitor.jpg' },
 ]
 
-
-
 function read(key, fallback) {
   const raw = localStorage.getItem(key)
   if (!raw) return fallback
@@ -76,6 +74,8 @@ export function getCart() {
 }
 
 export function addToCart(product, qty = 1) {
+  if (product.price <= 0) throw new Error('El precio del producto debe ser mayor a cero');  // Validación de precio positivo
+  
   const cart = getCart()
   const idx = cart.findIndex(i => i.id === product.id)
   if (idx >= 0) { cart[idx].qty += qty }
@@ -95,5 +95,8 @@ export function clearCart() {
 }
 
 export function cartTotal() {
-  return getCart().reduce((acc, i) => acc + i.price * i.qty, 0)
+  return getCart().reduce((acc, i) => {
+    // Asegurarse de que solo se sumen los productos con precios mayores a cero
+    return i.price > 0 ? acc + i.price * i.qty : acc;
+  }, 0)
 }

@@ -9,8 +9,9 @@ describe('Filtros: categorías y ofertas', () => {
     expect(filtered.every(p => p.category === cat)).toBeTrue()
   })
 
-  it('filtra ofertas (offer === true)', () => {
-    const offers = getProducts().filter(p => p.offer === true)
-    expect(offers.every(p => p.offer === true)).toBeTrue()
-  })
+it('filtra ofertas (offer === true)', () => {
+  const offers = getProducts().filter(p => p.offer === true);
+  expect(offers.every(p => p.offer === true)).toBeTrue();  
+});
+
 })

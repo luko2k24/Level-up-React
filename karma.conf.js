@@ -3,16 +3,15 @@ module.exports = function (config) {
   config.set({
     frameworks: ['jasmine'],
 
-    // Solo los tests como “entry”. El código src se importa desde los tests.
-    files: ['tests/**/*.spec.js'],
+    files: ['tests/**/*.spec.js'],  // Solo los tests como “entry”. El código src se importa desde los tests.
 
     preprocessors: {
-      'tests/**/*.spec.js': ['webpack', 'sourcemap']
+      'tests/**/*.spec.js': ['webpack', 'sourcemap']  // Usando webpack para procesar los tests
     },
 
     webpack: {
       mode: 'development',
-      devtool: 'inline-source-map',
+      devtool: 'inline-source-map',  // Configuración para mapas de origen
       module: {
         rules: [
           {
@@ -21,9 +20,8 @@ module.exports = function (config) {
             use: {
               loader: 'babel-loader',
               options: {
-                // Fuerza presets + plugin de coverage aunque .babelrc falte
                 presets: ['@babel/preset-env', '@babel/preset-react'],
-                plugins: ['istanbul']
+                plugins: ['istanbul']  // Para generar cobertura de código
               }
             }
           },
@@ -36,20 +34,25 @@ module.exports = function (config) {
       resolve: { extensions: ['.js', '.jsx'] }
     },
 
-    reporters: ['progress', 'coverage'],
-      coverageReporter: {
-      dir: 'coverage',
+    reporters: ['progress', 'coverage'],  // Reportes de progreso y cobertura
+    coverageReporter: {
+      dir: 'coverage',  // Directorio para los reportes de cobertura
       reporters: [
-        { type: 'html', subdir: 'html' },
-        { type: 'text-summary' }
+        { type: 'html', subdir: 'html' },  // Reporte visual en HTML
+        { type: 'text-summary' }  // Resumen en texto en la consola
       ],
       check: {
-        global: { statements: 60, branches: 70, functions: 60, lines: 60 }
+        global: {
+          statements: 60,  // Umbral de cobertura de sentencias
+          branches: 70,  // Umbral de cobertura de ramas
+          functions: 60,  // Umbral de cobertura de funciones
+          lines: 60  // Umbral de cobertura de líneas
+        }
       }
     },
 
-    browsers: ['ChromeHeadless'],
-    singleRun: true,
-    client: { jasmine: { random: false } }
+    browsers: ['ChromeHeadless'],  // Usar ChromeHeadless para pruebas automáticas
+    singleRun: true,  // Ejecutar Karma solo una vez
+    client: { jasmine: { random: false } }  // Desactivar el orden aleatorio de las pruebas (opcional)
   })
 }

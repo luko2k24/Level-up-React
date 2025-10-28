@@ -30,4 +30,12 @@ describe('Admin/DB CRUD integración simple', () => {
     deleteProduct('ptest-int')
     expect(getProducts().length).toBe(before)
   })
+  it('No permite crear un producto con ID duplicado', () => {
+  const before = getProducts().length;
+  expect(() => {
+    createProduct({ id: 'p1', name: 'Duplicado', price: 1000 });
+  }).toThrowError('ID duplicado');
+  expect(getProducts().length).toBe(before);  // Verifica que no se haya agregado el producto duplicado
+  });
+
 })

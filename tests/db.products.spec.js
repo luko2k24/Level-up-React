@@ -18,11 +18,11 @@ describe('DB - Productos (CRUD)', () => {
     deleteProduct('ptest')
   })
 
-  it('deleteProduct elimina un producto', () => {
-    createProduct({ id:'ptest', name:'X', price:1000, category:'C', offer:false, image:'/img/placeholder.png' })
-    const before = getProducts().length
-    deleteProduct('ptest')
-    const after = getProducts().length
-    expect(after).toBe(before - 1)
-  })
+it('deleteProduct elimina un producto', () => {
+  createProduct({ id: 'ptest', name: 'Producto Test', price: 1000 });
+  const before = getProducts().length;
+  deleteProduct('ptest');  // Eliminar el producto recién creado
+  expect(getProducts().length).toBe(before - 1);  // Verifica que se haya eliminado correctamente
+});
+
 })
