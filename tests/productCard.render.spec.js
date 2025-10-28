@@ -1,7 +1,7 @@
 // tests/components/productCard.render.spec.js
 import React from 'react'
 import { render, fireEvent, cleanup } from '@testing-library/react'
-import ProductCard from '../../src/components/ProductCard' // ajusta ruta si difiere
+import ProductCard from '../src/components/ProductCard' // ajusta ruta si difiere
 
 afterEach(cleanup)
 
