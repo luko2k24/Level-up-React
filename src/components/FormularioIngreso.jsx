@@ -22,7 +22,7 @@ const FormularioIngreso = () => {
       alert('Ingreso exitoso');
       setError('');
       // Redirigir a la página de inicio o dashboard
-      navigate('../pages/Admin.jsx'); // Redirige a la página principal
+      navigate('../Admin'); // Redirige a la página principal
     } else {
       setError('Correo o contraseña incorrectos');
     }
