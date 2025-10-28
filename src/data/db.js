@@ -22,7 +22,7 @@ function read(key, fallback) {
 
 function write(key, value) {
   localStorage.setItem(key, JSON.stringify(value))
-}
+}   
 
 // Inicializa productos si no existen
 export function initDB() {
