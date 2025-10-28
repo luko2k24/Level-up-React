@@ -6,7 +6,7 @@ import {
     vaciarCarrito, 
     totalCarrito,
     type Producto, 
-    type ItemCarrito // Importación de tipos con 'type'
+    type ItemCarrito
 } from '../data/db'
 
 export default function useEstadoCarrito() {
@@ -16,7 +16,7 @@ export default function useEstadoCarrito() {
 
   // Función para refrescar el estado del carrito y el total
   const refrescar = () => {
-    setCarrito(obtenerCarrito())  // Aquí, 'obtenerCarrito()' devuelve un array de 'ItemCarrito'
+    setCarrito(obtenerCarrito())  
     setTotal(totalCarrito())  
   }
 

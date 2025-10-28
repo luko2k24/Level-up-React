@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-// Importamos las funciones y la interfaz Producto desde la DB (ahora en TS)
 import { 
     obtenerCarrito, 
     agregarAlCarrito, 
@@ -8,7 +7,7 @@ import {
     vaciarCarrito, 
     totalCarrito, 
     ItemCarrito,
-    Producto, // Necesitamos la interfaz Producto para la función 'agregarAlCarrito'
+    Producto, 
     obtenerProductos,
     actualizarProducto,
     crearProducto,
@@ -16,7 +15,7 @@ import {
 } from '../data/db'; 
 import '../styles/admin.css';
 
-// --- 1. Tipado del Formulario (Propiedades en español) ---
+
 interface FormularioProducto {
     id: string | number;
     nombre: string; // Correcto: usando 'nombre'
@@ -25,7 +24,7 @@ interface FormularioProducto {
     oferta: boolean;
 }
 
-// --- 2. Constantes y Helpers ---
+
 
 const CLP = new Intl.NumberFormat('es-CL', {
     style: 'currency',
@@ -44,11 +43,11 @@ const FORMULARIO_INICIAL: FormularioProducto = {
     oferta: false 
 };
 
-/** * Reemplazo temporal para window.confirm que usa window.prompt para evitar el bloqueo del iframe.
+/** 
  * Pide al usuario que escriba 'ELIMINAR' para confirmar.
  */
 const customConfirm = (message: string): boolean => {
-    // Usamos prompt como una solución temporal para simular una confirmación sin usar confirm()
+
     const result = window.prompt(`${message}\n\nEscribe "ELIMINAR" para confirmar:`);
     return result === 'ELIMINAR';
 }
@@ -59,10 +58,8 @@ export default function AdminPanel() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Las URLs se mantienen en inglés/neutral
     const params = new URLSearchParams(location.search);
     const view = (params.get('view') || 'home').toLowerCase();
-    // const mode = (params.get('mode') || 'open').toLowerCase(); // No usado
 
     const setView = (v: string, m: string = 'open') => {
         const next = new URLSearchParams(location.search);
@@ -71,7 +68,6 @@ export default function AdminPanel() {
         navigate({ search: `?${next.toString()}` }, { replace: false });
     };
 
-    // Estadísticas
     const stats = useMemo(
         () => ({ compras: 1234, productos: 400, usuarios: 892, pendientes: 17 }),
         []
@@ -104,11 +100,8 @@ export default function AdminPanel() {
         }
     };
 
-    // Efecto para cargar los productos al montar
     useEffect(() => { actualizar() }, []);
 
-    /** Maneja los cambios en los inputs del formulario. */
-    // La clave (k) debe ser una clave de FormularioProducto
     const onChange = (k: keyof FormularioProducto, v: string | number | boolean) => setForm(prev => ({ ...prev, [k]: v }));
 
     /** Valida los campos del formulario. */
@@ -133,14 +126,13 @@ export default function AdminPanel() {
         }
         setErr('');
 
-        // Preparamos el payload usando propiedades en español
         const payload: Producto = {
-            id: String(form.id)?.trim() || `p${Date.now()}`, // ID es String
+            id: String(form.id)?.trim() || `p${Date.now()}`, 
             nombre: String(form.nombre).trim(), 
             precio: Number(form.precio),
             categoria: String(form.categoria).trim(),
             oferta: Boolean(form.oferta),
-            imagen: '', // Propiedad requerida por la interfaz Producto
+            imagen: '', 
         };
 
         try {
@@ -172,7 +164,7 @@ export default function AdminPanel() {
     const onEdit = (p: Producto) => {
         setForm({
             id: p.id,
-            nombre: p.nombre ?? '', // Corregido: Usar p.nombre
+            nombre: p.nombre ?? '', 
             precio: p.precio ?? '',
             categoria: p.categoria ?? '',
             oferta: !!p.oferta

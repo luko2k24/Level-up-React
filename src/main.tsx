@@ -1,11 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-// Nota: En TypeScript se suele omitir la extensión, asumiendo que App.tsx existe
 import App from './App'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/theme.css';
-// Nota: Asumiendo que db es un archivo .ts o .js
 import { inicializarBD } from './data/db'; 
 
 // Inicializa la conexión a la base de datos

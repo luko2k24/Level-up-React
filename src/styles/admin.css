@@ -29,15 +29,15 @@
 }
 
 .kpi-card.blue {
-  background-color: #1e90ff; /* Azul suave */
+  background-color: #1e90ff;
 }
 
 .kpi-card.green {
-  background-color: #32cd32; /* Verde menta */
+  background-color: #32cd32;
 }
 
 .kpi-card.yellow {
-  background-color: #ffeb3b; /* Amarillo suave */
+  background-color: #ffeb3b;
 }
 
 .kpi-card h3 {
@@ -88,7 +88,7 @@
 
 .form-actions button {
   padding: 12px;
-  background-color: #32cd32; /* Verde neón */
+  background-color: #32cd32; 
   color: white;
   border: none;
   border-radius: 8px;
@@ -97,7 +97,7 @@
 }
 
 .form-actions button:hover {
-  background-color: #28a745; /* Verde más oscuro al pasar el mouse */
+  background-color: #28a745;
 }
 
 /* Lista de productos */
@@ -110,50 +110,50 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background-color: #1a1a1a; /* Fondo oscuro para la tabla */
-  border-radius: 8px; /* Bordes redondeados para la tabla */
+  background-color: #1a1a1a; 
+  border-radius: 8px; 
 }
 
 .products-list th, .products-list td {
-  padding: 15px 25px; /* Más espacio para las celdas */
-  border: 1px solid #333; /* Borde gris oscuro */
+  padding: 15px 25px; 
+  border: 1px solid #333; 
   text-align: center;
-  color: #fff; /* Color de texto blanco */
+  color: #fff; 
 }
 
 .products-list th {
-  background-color: #333; /* Fondo oscuro para los encabezados */
-  font-weight: bold; /* Hacer que los encabezados sean más visibles */
+  background-color: #333; 
+  font-weight: bold; 
 }
 
 .products-list tr:nth-child(even) {
-  background-color: #252525; /* Color de fondo para filas pares */
+  background-color: #252525; 
 }
 
 .products-list tr:nth-child(odd) {
-  background-color: #2a2a2a; /* Color de fondo para filas impares */
+  background-color: #2a2a2a; 
 }
 
 .products-list tr:hover {
-  background-color: #3a3a3a; /* Cambio de fondo al pasar el mouse */
+  background-color: #3a3a3a; 
 }
 
 .products-list button {
   padding: 6px 12px;
-  background-color: #32cd32; /* Verde de los botones */
+  background-color: #32cd32; 
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-right: 10px; /* Espacio entre botones */
-  margin-bottom: 10px; /* Espacio entre filas */
-  font-weight: bold; /* Hacer que los textos de los botones se vean más fuertes */
+  margin-right: 10px; 
+  margin-bottom: 10px; 
+  font-weight: bold; 
 }
 
 .products-list button:hover {
-  background-color: #28a745; /* Verde más oscuro al pasar el mouse */
+  background-color: #28a745; 
 }
 
 .products-list button:focus {
-  outline: none; /* Eliminar el borde al hacer clic */
+  outline: none; 
 }

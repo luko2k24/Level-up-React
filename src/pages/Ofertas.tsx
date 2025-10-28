@@ -1,10 +1,8 @@
 import { JSX, useEffect, useState } from 'react'
-// Importamos 'Producto' y 'agregarAlCarrito' desde '../data/db'
 import { obtenerProductos, agregarAlCarrito, type Producto } from '../data/db'
 import ProductCard from '../components/ProductCard'
 import { useNavigate } from 'react-router-dom'
 
-// Eliminamos la interfaz Producto duplicada aquí.
 
 export default function Ofertas(): JSX.Element {
   // Tipamos el estado para que sea un array de Producto (el importado de db)
@@ -16,7 +14,7 @@ export default function Ofertas(): JSX.Element {
     const todosLosProductos = obtenerProductos();
     // Filtramos los productos que tienen 'oferta'
     setProductos(todosLosProductos.filter(p => p.oferta)) 
-  }, []) // El array vacío asegura que el efecto se ejecute solo una vez al montar
+  }, [])
 
   return (
     <>

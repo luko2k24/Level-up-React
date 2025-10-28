@@ -1,8 +1,4 @@
 import React from 'react';
-// Importamos el componente de forma tipada. 
-// Asumimos que la ruta es correcta, pero cambiamos la extensión a .tsx si es un archivo tipado.
-// NOTA: Si FormularioIngreso.jsx no ha sido migrado a TS/TSX, mantén la extensión '.jsx'.
-// Para este ejemplo, asumiremos que se mantiene la ruta relativa original, pero indicando que es un componente.
 import FormularioIngreso from '../components/FormularioIngreso'; 
 
 /**

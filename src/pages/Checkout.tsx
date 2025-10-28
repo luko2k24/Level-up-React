@@ -1,6 +1,5 @@
 import { useState, useMemo, FormEvent, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-// Importamos las interfaces y funciones de la base de datos
 import { obtenerCarrito, totalCarrito,  ItemCarrito, vaciarCarrito } from '../data/db';
 
 /** Interfaz que define la estructura de los datos del formulario de checkout. */

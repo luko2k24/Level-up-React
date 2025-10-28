@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 /**
  * Componente que se muestra cuando la compra no se puede completar (ej. carrito vacío, error de validación).
- * No requiere lógica ni hooks de estado.
  */
 export default function CompraFallida(): JSX.Element {
   return (

@@ -1,12 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-
-// Importación de componentes de diseño y páginas.
-// CORRECCIÓN: Se eliminan las extensiones explícitas (p. ej., '.js') de las importaciones
-// para que el bundler pueda resolver automáticamente los archivos (.js, .jsx, .ts, .tsx).
 import Header from './components/Header';
 import Footer from './components/Footer';
-
 import Home from './pages/Home';
 import Categorias from './pages/Categorias';
 import Ofertas from './pages/Ofertas';
@@ -18,12 +13,6 @@ import Admin from './pages/Admin';
 import ProductoDetalle from './pages/ProductoDetalle';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-
-// Importación de estilos y fuentes externas
-// CORRECCIÓN: Se comenta la importación de Font Awesome ya que está causando un
-// error de resolución de módulos en este entorno. Se recomienda cargarlo
-// globalmente o a través de CDN si es necesario.
-// import '@fortawesome/fontawesome-free/css/all.min.css';
 
 /**
  * Componente principal de la aplicación.

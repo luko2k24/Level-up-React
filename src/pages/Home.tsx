@@ -1,6 +1,4 @@
 import React, { JSX } from 'react'
-// Importamos 'Link' por si en el futuro se quiere hacer navegable alguna sección, aunque no se usa en el código actual.
-// Si esta página fuera la principal de una aplicación con react-router, sería útil.
 
 /**
  * Interfaz para la estructura de cada noticia.
@@ -11,7 +9,7 @@ interface Noticia {
   resumen: string;
   link: string;
   img: string;
-  etiqueta?: string; // Es opcional, por eso usamos '?'
+  etiqueta?: string;
 }
 
 export default function Home(): JSX.Element {

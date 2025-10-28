@@ -1,16 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
-// Importamos el tipo Producto desde la fuente centralizada (db.ts)
 import { obtenerProductoPorId, agregarAlCarrito, type Producto } from '../data/db'; 
-import { useState, useEffect } from 'react'; // Necesario para el manejo de estado si Producto no está disponible inmediatamente
-import { nanoid } from 'nanoid'; // Añadido para generar un id temporal para la clave de lista
+import { useState, useEffect } from 'react'; 
+import { nanoid } from 'nanoid';
 
-// Eliminamos la definición local de interface Producto.
 
 export default function ProductoDetalle() {
   // Extrae el 'id' de los parámetros de la URL. useParams devuelve un objeto de cadenas.
-  // El tipo correcto es { id: string | undefined } si el path es /producto/:id?
-  // Pero si el path es /producto/:id, 'id' será string, o undefined si se accede a la ruta padre
-  // Asumimos que la ruta es /producto/:id, pero verificamos que 'id' exista.
   const { id } = useParams<{ id: string }>();
 
   // Inicializamos el estado del producto
@@ -24,17 +19,17 @@ export default function ProductoDetalle() {
       const p = obtenerProductoPorId(id);
       setProducto(p);
     } else {
-      // Si no hay ID, limpiamos el estado (aunque en esta ruta no debería pasar)
+      // Si no hay ID, limpiamos el estado
       setProducto(undefined);
     }
-  }, [id]); // Depende del ID de la URL
+  }, [id]);
 
   // Usamos 'p' como alias para claridad en el JSX, si está cargado
   const p = producto;
 
-  // Manejo del estado: Producto no encontrado (incluye caso inicial de carga si se usa asíncrono)
+  // Manejo del estado: Producto no encontrado
   if (!p) {
-    // Si no está definido y el ID existe (o sea, ya intentamos cargarlo), es un error 404
+    // Si no está definido y el ID existe 
     return (
       <div className="empty-state text-center p-5 bg-dark rounded-3 shadow-lg text-light">
         <h3 className="fw-light">Producto no encontrado.</h3>
@@ -49,7 +44,6 @@ export default function ProductoDetalle() {
   // Función para manejar la adición al carrito
   const handleAddToCart = (producto: Producto) => {
     agregarAlCarrito(producto);
-    // Opcional: podrías añadir lógica de notificación aquí.
   };
 
   return (

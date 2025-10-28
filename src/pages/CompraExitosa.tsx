@@ -6,19 +6,10 @@ interface EstadoRutaCompra {
   monto: number;
 }
 
-// El componente se tipa para devolver un elemento JSX.
 export default function CompraExitosa(): JSX.Element {
-  // 2. Usamos useLocation. En react-router-dom v6, el estado (state) es de tipo 'unknown'.
-  // Para un tipado más robusto que satisfaga a la v6, podemos usar el hook de forma más simple.
-  const loc = useLocation();
-  
-  // 3. Tipamos de forma segura. Accedemos a loc.state y lo asertamos como el tipo de estado.
-  // Usamos 'as EstadoRutaCompra' después de verificar que existe, o un objeto vacío.
-  const estado = loc.state as EstadoRutaCompra | null;
 
-  // 4. Extraemos el monto de forma segura, usando el encadenamiento opcional y
-  // proporcionando 0 como valor predeterminado si el estado o el monto no existen.
-  // La aserción 'as EstadoRutaCompra | null' resuelve la mayoría de los errores de useLocation.
+  const loc = useLocation();
+  const estado = loc.state as EstadoRutaCompra | null;
   const monto = estado?.monto ?? 0;
 
   return (

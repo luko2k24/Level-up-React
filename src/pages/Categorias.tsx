@@ -1,12 +1,13 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { obtenerProductos, obtenerCategorias, agregarAlCarrito, Producto } from '../data/db'; // Importación actualizada
-import ProductCard from '../components/ProductCard'; // Asumo que este componente también está adaptado
+import { obtenerProductos, obtenerCategorias, agregarAlCarrito, Producto } from '../data/db'; 
+import ProductCard from '../components/ProductCard'; 
 
 // Tipos para las opciones de ordenación
 type OpcionOrdenacion = 'relevancia' | 'precio_asc' | 'precio_desc' | 'nombre';
 
 export default function Categorias() {
+
   // Hooks y Contexto
   const navegar = useNavigate();
   const [parametrosBusqueda] = useSearchParams();
@@ -62,8 +63,8 @@ export default function Categorias() {
   const textoBusqueda: string = consultaBusqueda ? ` para “${parametrosBusqueda.get('q')}”` : '';
   const textoCategoria: string = categoriaSeleccionada !== 'Todas' ? ` en ${categoriaSeleccionada}` : '';
 
-  // --- Manejadores de Eventos ---
 
+  // --- Manejadores de Eventos ---
   const manejarAgregarAlCarrito = (producto: Producto): void => {
     agregarAlCarrito(producto); // Asumo que db.ts tiene la función 'agregarAlCarrito'
   };

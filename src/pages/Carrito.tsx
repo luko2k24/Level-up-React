@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// Corregido: Importar el hook con el nombre de archivo/función correcto.
 import useEstadoCarrito from '../hooks/useCart'; 
-// Corregido: Importar el tipo ItemCarrito desde su fuente original (db.ts), usando 'type'.
 import { type ItemCarrito } from '../data/db'; 
 
 // Helper para formatear a CLP
@@ -11,13 +9,12 @@ const formatearCLP = (monto: number): string => {
 };
 
 export default function Carrito() {
-  // Desestructuración en español
   const { 
-    carrito, // cart
-    total, // total
-    eliminar, // remove
-    vaciar // clear
-  } = useEstadoCarrito(); // Usando el hook corregido
+    carrito,
+    total,
+    eliminar, 
+    vaciar 
+  } = useEstadoCarrito(); 
 
   // Estado vacío
   if (carrito.length === 0) {
