@@ -2,7 +2,7 @@
 .admin-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 30px;
   padding: 20px;
   background-color: #2a2a2a; /* Fondo oscuro */
   color: #fff; /* Texto blanco */
@@ -11,20 +11,21 @@
 /* Dashboard (Tarjetas KPI) */
 .dashboard {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   margin-bottom: 30px;
   width: 100%;
 }
 
 .kpi-card {
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 16px;
   color: white;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 150px;
 }
 
 .kpi-card.blue {
@@ -41,14 +42,14 @@
 
 .kpi-card h3 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .kpi-card p {
   margin: 5px 0;
 }
 
-/* Formulario */
+/* Formulario de gestión de productos */
 .form-container {
   width: 100%;
   max-width: 600px;
@@ -67,9 +68,9 @@
 }
 
 .form-group input, .form-group select {
-  padding: 10px;
+  padding: 12px;
   margin-top: 8px;
-  border-radius: 5px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   background-color: #3a3a3a;
   color: white;
@@ -82,7 +83,7 @@
 
 .form-actions {
   display: flex;
-  gap: 10px;
+  gap: 20px;
 }
 
 .form-actions button {
@@ -90,7 +91,7 @@
   background-color: #32cd32; /* Verde neón */
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   width: 100%;
 }
@@ -108,38 +109,51 @@
 .products-list table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #1a1a1a; /* Fondo oscuro para la tabla */
+  border-radius: 8px; /* Bordes redondeados para la tabla */
 }
 
 .products-list th, .products-list td {
-  padding: 12px;
-  border: 1px solid #ddd;
+  padding: 15px 25px; /* Más espacio para las celdas */
+  border: 1px solid #333; /* Borde gris oscuro */
   text-align: center;
+  color: #fff; /* Color de texto blanco */
 }
 
 .products-list th {
-  background-color: #444;
+  background-color: #333; /* Fondo oscuro para los encabezados */
+  font-weight: bold; /* Hacer que los encabezados sean más visibles */
 }
 
 .products-list tr:nth-child(even) {
-  background-color: #555;
+  background-color: #252525; /* Color de fondo para filas pares */
+}
+
+.products-list tr:nth-child(odd) {
+  background-color: #2a2a2a; /* Color de fondo para filas impares */
 }
 
 .products-list tr:hover {
-  background-color: #444;
+  background-color: #3a3a3a; /* Cambio de fondo al pasar el mouse */
 }
 
 .products-list button {
-  padding: 5px 10px;
-  background-color: #32cd32; /* Verde neón para los botones */
+  padding: 6px 12px;
+  background-color: #32cd32; /* Verde de los botones */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-right: 10px; /* Separación entre los botones */
-  margin-bottom: 5px; /* Separación entre las filas */
+  margin-right: 10px; /* Espacio entre botones */
+  margin-bottom: 10px; /* Espacio entre filas */
+  font-weight: bold; /* Hacer que los textos de los botones se vean más fuertes */
 }
 
-/* Efecto de hover para los botones */
 .products-list button:hover {
   background-color: #28a745; /* Verde más oscuro al pasar el mouse */
+}
+
+.products-list button:focus {
+  outline: none; /* Eliminar el borde al hacer clic */
 }
