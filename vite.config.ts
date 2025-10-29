@@ -7,5 +7,6 @@ export default defineConfig({
   test: {
     globals: true, // Habilita las funciones globales como describe, test, expect
     environment: 'jsdom', // Usa jsdom para las pruebas en el navegador
+    include: ['tests/**/*.test.tsx', 'tests/**/*.spec.tsx'], // Archivos de prueba específicos
   },
 });

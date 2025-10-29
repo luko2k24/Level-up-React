@@ -3,20 +3,17 @@ import { Link } from 'react-router-dom';
 import useEstadoCarrito from '../hooks/useCart'; 
 import { type ItemCarrito } from '../data/db'; 
 
-// Helper para formatear a CLP
 const formatearCLP = (monto: number): string => {
   return monto.toLocaleString('es-CL');
 };
 
-export default function Carrito() {
-  const { 
-    carrito,
-    total,
-    eliminar, 
-    vaciar 
-  } = useEstadoCarrito(); 
+type CarritoProps = {
+  eliminar: (id: string) => void; // Añadir eliminar como prop para pruebas
+};
 
-  // Estado vacío
+export default function Carrito({ eliminar }: CarritoProps) {
+  const { carrito, total, vaciar } = useEstadoCarrito(); 
+
   if (carrito.length === 0) {
     return (
       <div className="empty-state text-center p-5 bg-dark rounded-3 shadow-lg text-light">
@@ -34,7 +31,6 @@ export default function Carrito() {
     <>
       <h2 className="neon-title text-warning mb-4">Tu Carrito ({carrito.length} {carrito.length === 1 ? 'ítem' : 'ítems'})</h2>
       <div className="row g-4">
-        {/* ==== Columna izquierda: lista de productos ==== */}
         <div className="col-12 col-lg-8">
           <div className="panel p-3 p-md-4 bg-dark text-white rounded-3 shadow-lg">
             <div className="table-responsive">
@@ -58,8 +54,7 @@ export default function Carrito() {
                       <td>
                         <button
                           className="btn btn-sm btn-outline-danger"
-                          // Llamamos a la función eliminar
-                          onClick={() => eliminar(i.id)}> 
+                          onClick={() => eliminar(i.id)}> {/* Usa la prop eliminar */}
                           <i className="fa fa-times"></i>
                         </button>
                       </td>
@@ -75,8 +70,6 @@ export default function Carrito() {
             </div>
           </div>
         </div>
-
-        {/* ==== Columna derecha: resumen sticky ==== */}
         <div className="col-12 col-lg-4">
           <div className="panel p-4 bg-dark text-white rounded-3 shadow-lg position-sticky" style={{top:'90px'}}>
             <h5 className="mb-3 text-warning border-bottom border-secondary pb-2">Resumen de Compra</h5>
