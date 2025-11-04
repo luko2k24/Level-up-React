@@ -15,13 +15,12 @@ const mockProducto = {
   oferta: true,
 };
 
-// 1. EL MOCK DEBE ESTAR ARRIBA, fuera del bloque test()
-// 2. El mock debe coincidir con el nombre EN INGLÉS que usa el componente
+
 vi.mock('../data/db', () => ({
   getProductById: vi.fn(() => mockProducto), // Devuelve el producto
   addToCart: vi.fn(), // Añadimos la otra función que importa el componente
 }));
-// --- FIN DE LA CORRECCIÓN ---
+
 
 test('shouldRenderProductDetails', () => {
   render(

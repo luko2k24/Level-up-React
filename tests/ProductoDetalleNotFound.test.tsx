@@ -4,14 +4,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 
-// --- INICIO DE LA CORRECCIÓN ---
 
-// 1. EL MOCK DEBE ESTAR ARRIBA, fuera del bloque test()
+
+
 vi.mock('../data/db', () => ({
   getProductById: vi.fn(() => undefined), // Devuelve undefined
   addToCart: vi.fn(),
 }));
-// --- FIN DE LA CORRECCIÓN ---
+
 
 test('shouldShowProductNotFound', () => {
   render(

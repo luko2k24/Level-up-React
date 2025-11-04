@@ -7,7 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test:jest": "jest",
-    "test:vitest": "vitest run"
+    "test": "vitest run"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",

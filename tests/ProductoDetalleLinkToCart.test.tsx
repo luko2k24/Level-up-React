@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 
-// --- INICIO DE LA CORRECCIÓN ---
 
 const mockProducto = {
   id: '1',
@@ -14,12 +13,12 @@ const mockProducto = {
   oferta: true,
 };
 
-// 1. EL MOCK DEBE ESTAR ARRIBA, fuera del bloque test()
+
 vi.mock('../data/db', () => ({
   getProductById: vi.fn(() => mockProducto), // Devuelve el producto
   addToCart: vi.fn(),
 }));
-// --- FIN DE LA CORRECCIÓN ---
+
 
 test('shouldRenderLinkToCart', () => {
   render(
